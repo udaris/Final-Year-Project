@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurveda Plants Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            margin: 5;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        .column {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            grid-template-columns: 1fr 1fr 1fr;
+
+        }
+
+        .large-leaves {
+            background-color: #a1bbd1;
+
+        }
+
+        .small-leaves {
+            background-color: #A3BFA8;
+        }
+
+        .flowers {
+            background-color: #d0aaa8;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            grid-column: 1 / 4;
+        }
+
+        h2 {
+            color: rgb(25, 86, 85);
+        }
+
+        h4 {
+            color: rgb(18, 74, 56);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            color: rgb(8, 40, 29);
+        }
+
+        input[type="submit"] {
+            color: black;
+            background: rgba(125, 126, 111, 0.988);
+            padding: 10px 20px;
+            cursor: pointer;
+            display: inline-block;
+            border: 2px solid #333333;
+            border-radius: 50px;
+            font-size: 16px;
+            color: #090707;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        p {
+            color: MediumSeaGreen;
+        }
+
+        h3 {
+            color: MediumSeaGreen;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 300px;
+            height: 225px;
+            margin-top: 10px;
+        }
+
+        .grid-container {
+            background-image: url('https://wallpaperaccess.com/full/2996978.jpg');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            display: grid;
+            grid-column: 1 / 4;
+            grid-gap: 20px;
+            margin: 5;
+        }
+
+        .display {
+            background-position: center;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(246, 246, 246);
+            display: grid;
+            grid-column: 1 / 4;
+            text-align: center
+        }
+
+        .bottom-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #100d0d;
+            padding: 5;
+        }
+        .view-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #3c5870;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        right: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="grid-container">
+        <h1 class="title">Ayurveda Plants Prediction <button class="view-btn" onclick="window.location.href='/details.html'">View</button></h1>
+        <div class="column large-leaves">
+            <h2 style="color:rgb(14, 81, 103)">Ayurveda Plants Prediction with Large Leaves</h2>
+            <h4 style="color: rgb(71, 124, 129);">Upload an image and click submit</h4>
+
+            <form method="post" action="/largeplant" enctype="multipart/form-data">
+                <dl>
+                    <p style="color: aquamarine;">
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+
+                <p style="color: aqua;">
+                    <input type="submit" name="submit" value="Submit">
+                </p>
+
+            </form>
+
+            </p>
+        </div>
+
+        <div class="column small-leaves">
+            <!-- Content for the second column -->
+            <h2 style="color: rgb(43, 103, 9);">Ayurveda Plants Prediction with Small Leaves</h2>
+            <h4 style="color:rgb(15, 177, 42);">Upload an image and click submit</h4>
+
+            <form method="post" action="/smallLeaves" enctype="multipart/form-data">
+                <dl>
+                    <p style="color: aquamarine;">
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+
+                <p style="color: aqua;">
+                    <input type="submit" name="submit2" value="Submit">
+                </p>
+
+            </form>
+
+        </div>
+
+        <div class="column flowers">
+            <!-- Content for the third column -->
+            <h2 style="color: rgb(59, 67, 30);">Ayurveda Plants Prediction with Flowers</h2>
+            <h4 style="color:rgb(128, 97, 46);">Upload an image and click submit</h4>
+
+            <form method="post" action="/flowers" enctype="multipart/form-data">
+                <dl>
+                    <p style="color: aquamarine;">
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+
+                <p style="color: aqua;">
+                    <input type="submit" name="submit" value="Submit">
+                </p>
+
+            </form>
+        </div>
+
+
+    </div>
+    <div class="display">
+        <p style="color:rgb(16, 22, 24)">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            Ayurveda plant name for the following image is: <u>
+                <h3 style="color:rgb(7, 131, 173);">{{ messages[0] }}</h3>
+            </u><br>
+            <img src="{{ messages[1] }}" width="300" , height="225">
+        <h4 style="color:rgb(16, 40, 33);">{{ messages[2] }}</h4>
+        <h4 style="color:rgb(44, 38, 38);">{{ messages[3] }}</h4>
+        {% endif %}
+        {% endwith %}
+        </p>
+    </div>
+
+    <div class="bottom-content">
+        <p style="color: #7c7676;">All rights reserved &copy; 2023 Team Nature</p>
+    </div>
+
+</body>
+
+</html>
